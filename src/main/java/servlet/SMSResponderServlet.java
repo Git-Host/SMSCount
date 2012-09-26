@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.twilio.sdk.verbs.TwiMLResponse;
 import com.twilio.sdk.verbs.TwiMLException;
@@ -22,8 +23,26 @@ public class SMSResponderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	
+        HttpSession session = request.getSession(true);
+        Integer counter = (Integer)session.getAttribute("counter");
+        if (counter == null) {
+            counter = new Integer(1);
+        }
+ 
+        String body = request.getParameter("Body");
+/*
+        int count = counter.intValue();
+        if(count == 10)
+        count++;
+        session.setAttribute("counter", new Integer(count));
+                Sms sms = new Sms(counter.toString());
+
+        */
+        Sms sms = new Sms(body);
+
+        
         TwiMLResponse twiml = new TwiMLResponse();
-        Sms sms = new Sms("Hello, Mobile Monkey");
         try {
             twiml.append(sms);
         } catch (TwiMLException e) {
