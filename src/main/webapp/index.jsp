@@ -21,8 +21,32 @@
 			  <h1>SMSCount</h1>
 			  <p>Enter your phone number to start counting!</p>
 			  
+		       	<%
+				String error = (String)request.getAttribute("error");
+				if(error != null)
+				{
+		     	%>
+		        <div class="alert alert-error">
+		         <span><strong><%= error %></strong></span>
+			    </div>
+		     	<%
+				}
+		     	%>
+		     	
+		     	<%
+				String success = (String)request.getAttribute("success");
+				if(success != null)
+				{
+		     	%>
+		        <div class="alert alert-success">
+		         <span><strong><%= success %></strong></span>
+			    </div>
+		     	<%
+				}
+		     	%>
+			  
 			  <form action="/go" method="post" class="form-inline">
-  				<input type="text" class="required tel input-xlarge" placeholder="(xxx) xxx-xxxx">
+  				<input type="text" class="required tel input-xlarge" name="phoneNumber" placeholder="(xxx) xxx-xxxx">
   				<button type="submit" class="button btn btn-inverse">Submit</button>
 			  </form>
 
