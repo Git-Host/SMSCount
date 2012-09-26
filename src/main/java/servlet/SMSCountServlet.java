@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,9 +24,10 @@ import com.twilio.sdk.resource.factory.SmsFactory;
         name = "SMSCount", 
         urlPatterns = {"/go"}
     )
-public class SMSCountServlet extends HttpServlet {
+public class SMSCountServlet extends BaseServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(SMSCountServlet.class.getName());
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -68,6 +69,7 @@ public class SMSCountServlet extends HttpServlet {
 		catch(TwilioRestException e)
 		{
 			handleError(request, response, "Whoops.  Something is wrong here.  Please try later.");
+			log.severe(getStackTrace(e));
 			return;
 		}
 		
