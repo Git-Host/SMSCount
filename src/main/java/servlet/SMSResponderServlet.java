@@ -43,7 +43,7 @@ public class SMSResponderServlet extends HttpServlet {
             	if(count > 10)
             	{
             		message = "That was fun!";
-            		session.setAttribute("counter", new Integer(1));
+            		session.removeAttribute("counter");
             	}
             	else
             	{
@@ -52,6 +52,8 @@ public class SMSResponderServlet extends HttpServlet {
             		message = counter.toString();
             	}
             }
+            else
+            	message = "Oops.  That's not the next number.  Try again.";
         }
         catch(NumberFormatException e)
         {
