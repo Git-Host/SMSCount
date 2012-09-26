@@ -24,25 +24,42 @@ public class SMSResponderServlet extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    	/*
-
-        HttpSession session = request.getSession(true);
-        Integer counter = (Integer)session.getAttribute("counter");
-        if (counter == null) {
-            counter = new Integer(1);
-        }
- 
-        int count = counter.intValue();
-        if(count == 10)
-        count++;
-        session.setAttribute("counter", new Integer(count));
-                Sms sms = new Sms(counter.toString());
-
-        */
+    	String message = null;
         String body = request.getParameter("Body");
-        Sms sms = new Sms(body);
+        try
+        {
+        	Integer responseCount = Integer.parseInt(body);
 
-        
+            HttpSession session = request.getSession(true);
+            Integer counter = (Integer)session.getAttribute("counter");
+            if (counter == null) {
+                counter = new Integer(1);
+            }
+
+            int count = counter.intValue();
+            if(responseCount.intValue() == count + 1)
+            {
+            	count = responseCount.intValue() + 1;
+            	if(count > 10)
+            	{
+            		message = "That was fun!";
+            		session.setAttribute("counter", new Integer(1));
+            	}
+            	else
+            	{
+            		counter = new Integer(count);
+            		session.setAttribute("counter", counter);
+            		message = counter.toString();
+            	}
+            }
+        }
+        catch(NumberFormatException e)
+        {
+        	message = "Please reply with a number";
+        }
+    	
+        Sms sms = new Sms(message);
+
         TwiMLResponse twiml = new TwiMLResponse();
         try {
             twiml.append(sms);
