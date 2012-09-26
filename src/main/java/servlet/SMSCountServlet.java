@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
         name = "SMSCount", 
-        urlPatterns = {"/SMSCount"}
+        urlPatterns = {"/go"}
     )
 public class SMSCountServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ServletOutputStream out = resp.getOutputStream();
         out.write("hello heroku".getBytes());
