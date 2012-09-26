@@ -23,15 +23,15 @@ public class SMSResponderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	
+
+    	/*
+
         HttpSession session = request.getSession(true);
         Integer counter = (Integer)session.getAttribute("counter");
         if (counter == null) {
             counter = new Integer(1);
         }
  
-        String body = request.getParameter("Body");
-/*
         int count = counter.intValue();
         if(count == 10)
         count++;
@@ -39,6 +39,7 @@ public class SMSResponderServlet extends HttpServlet {
                 Sms sms = new Sms(counter.toString());
 
         */
+        String body = request.getParameter("Body");
         Sms sms = new Sms(body);
 
         
