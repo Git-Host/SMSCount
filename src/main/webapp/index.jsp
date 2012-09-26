@@ -21,7 +21,7 @@
 			  <h1>SMSCount</h1>
 			  <p>Enter your phone number to start counting!</p>
 			  
-			  <form action="/go" method="post">
+			  <form action="/go" method="post" class="form-inline">
   				<input type="text" class="required tel input-xlarge" placeholder="(xxx) xxx-xxxx">
   				<button type="submit" class="button btn btn-inverse">Submit</button>
 			  </form>
