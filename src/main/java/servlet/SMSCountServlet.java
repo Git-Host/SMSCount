@@ -55,7 +55,7 @@ public class SMSCountServlet extends HttpServlet {
 
 		try
 		{
-			TwilioRestClient client = new TwilioRestClient("AC6f8edababe938c819e2bf19a9ca6548b", "114795015624e7a9036e9dd2dd50b07f");
+			TwilioRestClient client = new TwilioRestClient("xxx", "yyy");
 
 			Account account = client.getAccount();
 			SmsFactory smsFactory = account.getSmsFactory();
