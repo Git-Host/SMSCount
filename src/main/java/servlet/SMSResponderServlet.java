@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.logging.Logger;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import com.twilio.sdk.verbs.Sms;
     )
 public class SMSResponderServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(SMSResponderServlet.class.getName());
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -64,7 +67,7 @@ public class SMSResponderServlet extends BaseServlet {
         try {
             twiml.append(sms);
         } catch (TwiMLException e) {
-            e.printStackTrace();
+			log.severe(getStackTrace(e));
         }
  
         response.setContentType("application/xml");
